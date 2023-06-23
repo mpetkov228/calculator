@@ -2,14 +2,29 @@ const keypad = document.querySelector('.keypad');
 const calculationDiv = document.querySelector('.calculation');
 const resultDiv = document.querySelector('.result');
 
+let previousResult = Number(resultDiv.textContent);
+let currentResult = '';
+
 keypad.addEventListener('click', (e) => {
     let input = e.target.textContent;
-    if (isNaN(Number(input))) {
-        calculationDiv.textContent += ' ' + input + ' ';
+
+    if (input == '=') {
+        let [num1, operator, num2] = calculationDiv.textContent.split(' ');
+        num1 = Number(num1);
+        num2 = Number(num2);
+        let result = operate(num1, num2, operator);
+        resultDiv.textContent = currentResult + result;
+        calculationDiv.textContent = '';
         return;
     }
 
-    calculationDiv.textContent += input;
+    if (isNaN(Number(input))) {
+        let operator = input;
+        return;
+    }
+
+    currentResult += input;
+    resultDiv.textContent = currentResult;
 });
 
 

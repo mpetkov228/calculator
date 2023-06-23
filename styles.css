@@ -32,11 +32,6 @@ body {
     justify-content: end;
 }
 
-.calculation {
-    margin-top: 8px;
-    font-size: 14px;
-}
-
 .result {
     font-size: 24px;
     font-weight: bold;
