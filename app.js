@@ -1,3 +1,18 @@
+const keypad = document.querySelector('.keypad');
+const calculationDiv = document.querySelector('.calculation');
+const resultDiv = document.querySelector('.result');
+
+keypad.addEventListener('click', (e) => {
+    let input = e.target.textContent;
+    if (isNaN(Number(input))) {
+        calculationDiv.textContent += ' ' + input + ' ';
+        return;
+    }
+
+    calculationDiv.textContent += input;
+});
+
+
 function add(a, b) {
     return a + b;
 }
@@ -32,3 +47,4 @@ function operate(num1, num2, operator) {
     }
     return result;
 }
+
