@@ -21,7 +21,7 @@ keypad.addEventListener('click', (e) => {
         num2 = '';
     }
     
-    if (isNaN(Number(num))) {
+    if (isNaN(Number(num)) && num != '.') {
         operator = num;
         return;
     }
@@ -55,6 +55,13 @@ function divide(a, b) {
     return a / b;
 }
 
+function mod(a, b) {
+    if (b == 0) {
+        return 'That\'s a nono!';
+    }
+    return a % b;
+}
+
 function operate(num1, num2, operator) {
     let result;
     num1 = Number(num1);
@@ -71,6 +78,9 @@ function operate(num1, num2, operator) {
             break;
         case '/':
             result = divide(num1, num2);
+            break;
+        case '%':
+            result = mod(num1, num2);
             break;
     }
     return result;
