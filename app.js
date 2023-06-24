@@ -1,19 +1,39 @@
 const keypad = document.querySelector('.keypad');
 const resultDiv = document.querySelector('.result');
 
-let temp = '';
+let num1 = '';
+let num2 = '';
+let operator;
 let expression = '';
 
 keypad.addEventListener('click', (e) => {
     let num = e.target.textContent;
+
+    if (num == 'C') {
+        return clear();
+    }
+
+    if (num == '=' && operator) {
+        let result = operate(Number(num1), Number(num2), operator);
+        resultDiv.textContent = result;
+
+        num1 = result;
+        num2 = '';
+    }
+    
     if (isNaN(Number(num))) {
-        let operator = num;
-        expression = `${temp} ${operator} `;
+        operator = num;
         return;
     }
-    temp += num;
-    console.log(temp);
-    resultDiv.textContent = temp;
+
+    if (operator) {
+        num2 += num;
+        resultDiv.textContent = num2;
+        return;
+    } else {
+        num1 += num;
+        resultDiv.textContent = num1;
+    }   
 });
 
 function add(a, b) {
@@ -51,5 +71,12 @@ function operate(num1, num2, operator) {
             break;
     }
     return result;
+}
+
+function clear() {
+    resultDiv.textContent = '0';
+    num1 = '';
+    num2 = '';
+    operator = undefined;
 }
 
